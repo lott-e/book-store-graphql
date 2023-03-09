@@ -36,6 +36,7 @@ const BookType = new GraphQLObjectType({
     })
 });
 
+
 const AuthorType = new GraphQLObjectType({
     name: 'Author',
     //mutliple types with multiple references to eachother
