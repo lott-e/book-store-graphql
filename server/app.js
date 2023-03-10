@@ -6,11 +6,19 @@ const schema = require('./schema/schema')
 require('dotenv').config()
 // invoke our function to create our app
 const app = express()
+const cors = require('cors')
 
 
 mongoose.connect(`mongodb+srv://${process.env.MONGO_DB_USERNAME}:${process.env.MONGO_DB_PASSWORD}@findbooks.mwouloj.mongodb.net/?retryWrites=true&w=majority`);
 mongoose.connection.once('open', () => { console.log('connected to database') })
 
+const allowedOrigins = ["http://localhost:4000", "http://localhost:3000"];
+
+app.use(cors({
+    origin: allowedOrigins,
+    // methods: ["GET"],
+}));
+// app.use(cors())
 //graphqlHTTP() function will fire on /graphql req. This is middleware 
 app.use('/graphql', graphqlHTTP({
     //passing through a schema 
